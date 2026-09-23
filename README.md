@@ -1,4 +1,4 @@
-# 🚀 Space Bot API Investigation Sheet
+# 🚀 ASTRO Bot API Investigation Sheet
 **Total Marks: 40**
 **TASK 1: Collect Required API Documentation**
 This investigation sheet helps you gather key technical information from the three
