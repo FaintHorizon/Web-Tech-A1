@@ -169,7 +169,7 @@ def main():
 
     weather_key = get_api_key(
         "Weather API key",
-        "44ffcbc058fc195f1774b664fe97045d"
+        "YOUR_OPENWEATHER_API_KEY"
     )
 
     rooms = get_rooms(token)
