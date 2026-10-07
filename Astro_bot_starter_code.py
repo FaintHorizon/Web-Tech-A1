@@ -9,8 +9,8 @@
 # =========================
 
 import #complete the import statement to include the requests library
-import #complete the import statement to include the json library
-import #complete the import statement to include the time library
+import json
+import time
 from #complete the import statement to include the datetime library
 
 # =========================
@@ -25,7 +25,7 @@ def get_webex_token():
         return "Bearer YOUR_WEBEX_TOKEN"
 
 def get_api_key(prompt, hardcoded_key):
-  #complete the function to get the API key from user input or use a hardcoded key
+#complete the function to get the API key from user input or use a hardcoded key
 
 # =========================
 # WEBEX FUNCTIONS

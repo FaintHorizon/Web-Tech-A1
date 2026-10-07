@@ -21,9 +21,17 @@ pattern in development of the Bot
 ## ISS Current Location API (2 marks)
 | Criteria | Details |
 |---------|---------|
-| API Base URL | `_______________________________` |
+| API Base URL | http://api.open-notify.org/iss-now.json` |
 | Endpoint for current ISS location | `_______________________________` |
 | Sample response format (example JSON) |
+{
+    "iss_position": {
+        "latitude": "40.3008",
+        "longitude": "121.2208"
+    },
+    "timestamp": 1790761317,
+    "message": "success"
+}
 ```
 ```
 |
@@ -33,8 +41,8 @@ pattern in development of the Bot
 |---------|---------|
 | Provider used (Choose one) | **LocationIQ / Mapbox/ OpenWeatherMap other -provide
 detail** |
-| API Base URL | `_______________________________` |
-| Endpoint for geocoding | `_______________________________` |
+| API Base URL | `http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}` |
+| Endpoint for geocoding | `http://api.openweathermap.org/geo/1.0/direct>` |
 | Endpoint for reverse geocoding | `_______________________________` |
 | Authentication method | `_______________________________` |
 | Required query parameters | `_______________________________` |
@@ -49,14 +57,14 @@ detail** |
 |---------|---------|
 | API Provider (Choose one) | **OpenWeather, OpenWeatherMap (or other – provide
 details)** |
-| API Base URL | `_______________________________` |
-| Endpoint for current weather | `_______________________________` |
-| Authentication method | `_______________________________` |
-| Required query parameters | `_______________________________` |
+| API Base URL | `https://api.openweathermap.org/data/2.5/weather?lat={51.5074}&lon={0.1278}&appid={APIKEY}&units={metric}` |
+| Endpoint for current weather | `https://api.openweathermap.org/data/2.5/weather?` |
+| Authentication method | `{appid}` |
+| Required query parameters | `lat,long,appid,units` |
 | Sample JSON response (formatted example) |
 ```
 ```
-|
+|       
 ---
 ## Epoch to Human Time Conversion (Python time module) (2 marks)
 | Criteria | Details |
