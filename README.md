@@ -1,3 +1,14 @@
+Hardcoding Keys
+exaple make a keys.json file in main
+keys.json is part of the git ignore
+{
+    "keys":
+    {
+        "Webex":"Webex Dev Key",
+        "Open-Weather":"Open Weather API Key"
+    }
+}
+
 # 🚀 ASTRO Bot API Investigation Sheet
 **Total Marks: 40**
 **TASK 1: Collect Required API Documentation**
@@ -10,19 +21,20 @@ pattern in development of the Bot
 ## Webex Messaging API (4 marks)
 | Criteria | Details |
 |---------|---------|
-| API Base URL | `_______________________________` |
-| Authentication Method | `_______________________________` |
-| Endpoint to list rooms | `_______________________________` |
-| Endpoint to get messages | `_______________________________` |
-| Endpoint to send message | `_______________________________` |
-| Required headers | `_______________________________` |
+| API Base URL | `https://webexapis.com` |
+| Authentication Method | `Authorization: Bearer THE_BOTS_ACCESS_TOKEN` |
+| Endpoint to list rooms | `/v1/rooms` |
+| Endpoint to get messages | `/v1/messages` |
+| Endpoint to send message | `/v1/messages` |
+| Required headers | `"Authorization": "Bearer API Key",
+    "Accept": "application/json"` |
 | Sample full GET or POST request | `_______________________________` |
 ---
 ## ISS Current Location API (2 marks)
 | Criteria | Details |
 |---------|---------|
 | API Base URL | http://api.open-notify.org/iss-now.json` |
-| Endpoint for current ISS location | `_______________________________` |
+| Endpoint for current ISS location | `http://api.open-notify.org/` |
 | Sample response format (example JSON) |
 {
     "iss_position": {
@@ -39,15 +51,22 @@ pattern in development of the Bot
 ## Geocoding API (4 marks)
 | Criteria | Details |
 |---------|---------|
-| Provider used (Choose one) | **LocationIQ / Mapbox/ OpenWeatherMap other -provide
+| Provider used (Choose one) | **LocationIQ / Mapbox/ OpenWeatherMap other -provide -- Remove {} for requests
 detail** |
-| API Base URL | `http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}` |
+| API Base URL | `http://api.openweathermap.org/geo/1.0/zip?zip=WD25,GB&appid={API Key}` |
 | Endpoint for geocoding | `http://api.openweathermap.org/geo/1.0/direct>` |
-| Endpoint for reverse geocoding | `_______________________________` |
-| Authentication method | `_______________________________` |
-| Required query parameters | `_______________________________` |
-| Sample request with latitude/longitude | `_______________________________` |
+| Endpoint for reverse geocoding | `http://api.openweathermap.org/geo/1.0/reverse?` |
+| Authentication method | `N/A` |
+| Required query parameters | `PostCode,CoutryCode,APIKEY` |
+| Sample request with latitude/longitude | `lat={lat}&lon={lon}&limit={limit}&appid={API key}` |
 | Sample JSON response (formatted example) |
+{
+    "zip": "WD25",
+    "name": "Watford",
+    "lat": 51.6553,
+    "lon": -0.396,
+    "country": "GB"
+}
 ```
 ```
 |
@@ -115,9 +134,14 @@ details)** |
 ## Epoch to Human Time Conversion (Python time module) (2 marks)
 | Criteria | Details |
 |---------|---------|
-| Library used | `_______________________________` |
-| Function used to convert epoch | `_______________________________` |
+| Library used | `datetime` |
+| Function used to convert epoch | `datetime.fromtimestamp` |
 | Sample code to convert timestamp |
+https://www.geeksforgeeks.org/python/python-datetime-module/
+from datetime import datetime
+date_time = datetime.fromtimestamp(1887639468)
+print(date_time)
+print(date_time.date())
 ```
 ```
 |
