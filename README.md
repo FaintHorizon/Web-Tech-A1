@@ -59,9 +59,55 @@ detail** |
 details)** |
 | API Base URL | `https://api.openweathermap.org/data/2.5/weather?lat={51.5074}&lon={0.1278}&appid={APIKEY}&units={metric}` |
 | Endpoint for current weather | `https://api.openweathermap.org/data/2.5/weather?` |
-| Authentication method | `{appid}` |
+| Authentication method | `{appid}` | -- remove {} brackets
 | Required query parameters | `lat,long,appid,units` |
 | Sample JSON response (formatted example) |
+{
+    "coord": {
+        "lon": 0.1278,
+        "lat": 51.5074
+    },
+    "weather": [
+        {
+            "id": 802,
+            "main": "Clouds",
+            "description": "scattered clouds",
+            "icon": "03d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 9.54,
+        "feels_like": 9.54,
+        "temp_min": 8.62,
+        "temp_max": 10.76,
+        "pressure": 1028,
+        "humidity": 86,
+        "sea_level": 1028,
+        "grnd_level": 1027
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 1.23,
+        "deg": 210,
+        "gust": 2.48
+    },
+    "clouds": {
+        "all": 37
+    },
+    "dt": 1791959272,
+    "sys": {
+        "type": 2,
+        "id": 2011528,
+        "country": "GB",
+        "sunrise": 1791958872,
+        "sunset": 1791997772
+    },
+    "timezone": 3600,
+    "id": 7302135,
+    "name": "Abbey Wood",
+    "cod": 200
+}
 ```
 ```
 |       
