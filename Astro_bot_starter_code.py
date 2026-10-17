@@ -8,17 +8,10 @@
 # REQUIRED LIBRARIES
 # =========================
 
-import #complete the import statement to include the requests library
+import requests
 import json
 import time
-from #complete the import statement to include the datetime library
-
-# ---- Getting API Keys ----
-with open("keys.json", "r") as file:
-    keys = json.load(file)
-
-webex_key = keys["keys"]["Webex"]
-weather_key = keys["keys"]["Open-Weather"]
+from datetime import datetime
 
 # =========================
 # CONFIGURATION FUNCTIONS
