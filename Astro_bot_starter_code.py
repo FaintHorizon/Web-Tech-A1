@@ -25,9 +25,8 @@ def get_webex_token():
     else:
         with open("keys.json", "r") as file:
             keys = json.load(file)
-
-        webex_key = keys["keys"]["Webex"]
-        return f"Bearer {webex_key}"
+        token = keys["keys"]["Webex"]
+        return f"Bearer {token}"
 
 
 def get_api_key(prompt, hardcoded_key):
@@ -46,11 +45,15 @@ def get_api_key(prompt, hardcoded_key):
 # WEBEX FUNCTIONS
 # =========================
 def get_rooms(token):
-    url = #complete the URL to fetch rooms from Webex API
-    headers = #complete the headers dictionary to include the Authorization header with the token
-    response = #complete the request to get rooms using requests.get with the url and headers
+    url = ("https://webexapis.com/v1/rooms")
+    headers = {
+    "Authorization": token,
+    "Accept": "application/json"
+    }
+    payload = None
+    response = requests.request('GET', url, headers=headers, data = payload)
 
-    if response.status_code != #complete the condition to check if the response status code is not xxx:
+    if response.status_code != 200:
         print("Error fetching rooms:", response.status_code)
         return []
 
