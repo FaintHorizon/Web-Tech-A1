@@ -13,19 +13,41 @@ import json
 import time
 from #complete the import statement to include the datetime library
 
+# ---- Getting API Keys ----
+with open("keys.json", "r") as file:
+    keys = json.load(file)
+
+webex_key = keys["keys"]["Webex"]
+weather_key = keys["keys"]["Open-Weather"]
+
 # =========================
 # CONFIGURATION FUNCTIONS
 # =========================
 def get_webex_token():
     choice = input("Use hard-coded Webex token? (y/n): ").lower()
+
     if choice == "n":
-        token = input("Enter your Webex Access Token: ")
+        token = input("Enter your Webex Access Token: ") #Asks the user to input their Webex Access Token if they choose not to use the hard-coded token
         return f"Bearer {token}"
     else:
-        return "Bearer YOUR_WEBEX_TOKEN"
+        with open("keys.json", "r") as file:
+            keys = json.load(file)
+
+        webex_key = keys["keys"]["Webex"]
+        return f"Bearer {webex_key}"
+
 
 def get_api_key(prompt, hardcoded_key):
-#complete the function to get the API key from user input or use a hardcoded key
+    choice = input(f"Use hard-coded {prompt}? (y/n): ").lower() # Asks the user if they want to use the hard-coded API key or input their own
+
+    if choice == "n":
+        return input(f"Enter your {prompt}: ")
+
+    with open("keys.json", "r") as file: #Opens the keys.json file to read the hard-coded API key
+        keys = json.load(file)
+
+    return keys["keys"][hardcoded_key] #Returns the hard-coded API key from the keys.json file if the user chooses to use it
+
 
 # =========================
 # WEBEX FUNCTIONS
