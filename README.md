@@ -145,7 +145,9 @@ print(date_time.date())
 ```
 ```
 |
-| Output (human-readable time) | `_______________________________` |
+| Output (human-readable time) | 
+`2029-10-25 17:17:48
+2029-10-25` |
 ---
 ## Extended Feature API ( 3 marks)
 | Criteria | Details |
