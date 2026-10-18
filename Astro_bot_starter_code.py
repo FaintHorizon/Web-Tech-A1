@@ -45,34 +45,36 @@ def get_api_key(prompt, hardcoded_key):
 # WEBEX FUNCTIONS
 # =========================
 def get_rooms(token):
-    url = ("https://webexapis.com/v1/rooms")
+    url = ("https://webexapis.com/v1/rooms") #URL to fetch rooms from Webex API
     headers = {
     "Authorization": token,
-    "Accept": "application/json"
+    "Accept": "application/json" #headers dictionary to include the Authorization header with the token and Accept as application/json
     }
     payload = None
-    response = requests.request('GET', url, headers=headers, data = payload)
+    response = requests.request('GET', url, headers=headers, data = payload) #request to fetch rooms from Webex API using the requests library with the GET method, passing in the URL, headers, and payload
 
-    if response.status_code != 200:
+    if response.status_code != 200: #Checks if the response status code is not 200 (OK), indicating an error in fetching rooms
         print("Error fetching rooms:", response.status_code)
         return []
 
-    return response.json().get("items", [])
+    return response.json().get("items", []) #Returns the list of rooms from the JSON response, or an empty list if no rooms are found
 
 
-def print_rooms(rooms):
+def print_rooms(rooms): #Function to print the list of rooms with their titles and IDs
     for room in rooms:
-        print(f"Room: {room['title']} | ID: {room['id']}")
+        print(f"Room: {room['title']} | ID: {room['id']}") #Breaks down the room information into a formatted string displaying the room title and ID
 
 
-def select_room(rooms):
+def select_room(rooms): #Function to allow the user to select a room by name from the list of rooms
     while True:
-        name = input(#complete the input prompt to ask the user for the room name)
+        name = input("Enter the Webex room name: ") #Asks the user to input the name of the Webex room they want to select
+
         for room in rooms:
-            if name.lower() in room["title"].lower():
-                print(#complete the print statement to confirm the selected room)
-                return room["id"]
-        print(#complete the print statement to indicate that the room was not found)
+            if name.lower() in room["title"].lower(): #Checks if the input name is a valid room title to find a matching room
+                print(f"Selected room: {room['title']}")
+                return room["id"] #Returns the ID of the selected room if a match is found
+
+        print("Room not found. Please try again.") #If no matching room is found, it prompts the user to try again
 
 
 def get_latest_message(token, room_id):
