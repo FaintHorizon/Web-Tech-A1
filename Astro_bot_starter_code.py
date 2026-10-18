@@ -2,6 +2,7 @@
 # REQUIRED LIBRARIES
 # =========================
 
+from fastapi import params
 import requests
 import json
 import time
@@ -77,7 +78,7 @@ def select_room(rooms): #Function to allow the user to select a room by name fro
         print("Room not found. Please try again.") #If no matching room is found, it prompts the user to try again
 
 
-def get_latest_message(token, room_id):
+def get_latest_message(token, room_id): #Function to fetch the latest message from a specified Webex room using the Webex API
     url = "https://webexapis.com/v1/messages"
     params = {"roomId": room_id, "max": 1}
     headers = {
@@ -85,35 +86,35 @@ def get_latest_message(token, room_id):
         "Accept": "application/json"
     }
 
-    response = requests.get(url, headers=headers, params=params)
+    response = requests.get(url, headers=headers, params=params) #request to fetch the latest message from the specified Webex room using the requests library with the GET method, passing in the URL, headers, and parameters
 
-    if response.status_code != 200:
+    if response.status_code != 200: #Error handling to check if the response status code is not 200 (OK), indicating an error in fetching messages
         print("Error fetching messages:", response.status_code)
         return None, None
 
     data = response.json().get("items", [])
 
-    if not data:
+    if not data: #Checks if the data list is empty, indicating that there are no messages in the specified room
         return None, None
 
-    latest = data[0]
+    latest = data[0] #Retrieves the latest message from the data list, which contains the messages fetched from the Webex API
     return latest.get("id"), latest.get("text", "")
 
 
-def send_message(token, room_id, message):
+def send_message(token, room_id, message): #Function to send a message to a specified Webex room using the Webex API
     url = "https://webexapis.com/v1/messages"
-    headers = {
+    headers = { #headers dictionary to include the Authorization header with the token and Content-Type as application/json
         "Authorization": token,
         "Content-Type": "application/json"
     }
-    data = {
+    data = { #data dictionary to include the room ID and the message text to be sent to the specified Webex room
         "roomId": room_id,
         "text": message
     }
 
     response = requests.post(url, headers=headers, data=json.dumps(data))
 
-    if response.status_code != 200:
+    if response.status_code != 200: #Error handling to check if the response status code is not 200 (OK), indicating an error in sending the message
         print("Error sending message:", response.status_code)
 
 # =========================
@@ -133,23 +134,45 @@ def get_city_coordinates(city, api_key):
 
 
 def get_weather(city, api_key):
-    location = get_city_coordinates(city, api_key)
+    location = get_city_coordinates(city, api_key) #Calls the get_city_coordinates function to retrieve the latitude and longitude of the specified city using the OpenWeatherMap API
 
     if not location:
-        return #complete the return statement to indicate that the city was not found
+        return f"City '{city}' not found." #If the location is not found, it returns a message indicating that the city was not found
 
-    url = #complete the URL to fetch weather data from OpenWeatherMap API
-    params = #complete the params dictionary to include the latitude, longitude, units as metric, and the API key
+    url = "https://api.openweathermap.org/data/2.5/weather"
+    parameters = { #parameters dictionary to include the latitude, longitude, units, and the API key
+        "lat": location["lat"],
+        "lon": location["lon"],
+        "units": "metric",
+        "appid": api_key
+    }
 
-    response = requests.#complete(url, params=params)
+    response = requests.get(url, params=parameters) #request to fetch the weather data for the specified city using the OpenWeatherMap API with the GET method, passing in the URL and parameters
 
     if response.status_code != 200:
-        return #complete the return statement to indicate that the wheather weather data retrieved or not
+        print("Error fetching weather:", response.status_code)
+        return "Unable to retrieve weather data."
 
-    weather = response.json()
+    weather = response.json() #Parses the JSON response from the OpenWeatherMap API to extract the weather data for the specified city
 
-    return (
-        #complete the return statement to format and return the weather information such as including city name, country, temperature, weather description, humidity, and wind speed
+    city_name = weather.get("name", city) #Retrieves the city name from the weather data, defaulting to the input city name if not found
+    country = weather.get("sys", {}).get("country", "Unknown")
+    temperature = weather.get("main", {}).get("temp", "Unknown")
+    humidity = weather.get("main", {}).get("humidity", "Unknown")
+    wind_speed = weather.get("wind", {}).get("speed", "Unknown")
+    weather_data = weather.get("weather", []) #Retrieves the weather conditions from the weather data, defaulting to an empty list if not found
+
+    if weather_data: #Checks if the weather_data list is not empty, indicating that weather conditions are available
+        description = weather_data[0].get("description", "Unknown")
+    else:
+        description = "Unknown" #If the weather_data list is empty, it sets the description to "Unknown" to indicate that the weather conditions are not available
+
+    return ( #Returns a formatted string containing the weather information for the specified city, including the city name, country, temperature, weather conditions, humidity, and wind speed
+        f"Weather in {city_name}, {country}:\n"
+        f"Temperature: {temperature} °C\n"
+        f"Conditions: {description.capitalize()}\n"
+        f"Humidity: {humidity}%\n"
+        f"Wind speed: {wind_speed} m/s"
     )
 
 # =========================
