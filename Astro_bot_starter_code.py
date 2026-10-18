@@ -21,24 +21,30 @@ def get_webex_token():
 
     if choice == "n":
         token = input("Enter your Webex Access Token: ") #Asks the user to input their Webex Access Token if they choose not to use the hard-coded token
+        print(f"---Debug: Using user-provided Webex token: {token}---")
         return f"Bearer {token}"
     else:
         with open("keys.json", "r") as file:
             keys = json.load(file)
         token = keys["keys"]["Webex"]
+        print (f"---Debug: Using Hard-coded Webex token: {token}---")
         return f"Bearer {token}"
 
 
-def get_api_key(prompt, hardcoded_key):
-    choice = input(f"Use hard-coded {prompt}? (y/n): ").lower() # Asks the user if they want to use the hard-coded API key or input their own
+
+def get_api_key():
+    choice = input("Use hard-coded Open-Weather key? (y/n): ").lower()
 
     if choice == "n":
-        return input(f"Enter your {prompt}: ")
-
-    with open("keys.json", "r") as file: #Opens the keys.json file to read the hard-coded API key
-        keys = json.load(file)
-
-    return keys["keys"]["Open-Weather"] #Returns the hard-coded API key from the keys.json file if the user chooses to use it
+        weatherKey = input("Enter your Open-Weather API key: ")
+        print("---Debug: Using user-provided Open-Weather key---")
+        return weatherKey
+    else:
+        with open("keys.json", "r") as file:
+            keys = json.load(file)
+    weatherKey = keys["keys"]["Open-Weather"]
+    print("---Debug: Using key from keys.json---")
+    return weatherKey
 
 
 # =========================
