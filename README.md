@@ -28,7 +28,22 @@ pattern in development of the Bot
 | Endpoint to send message | `/v1/messages` |
 | Required headers | `"Authorization": "Bearer API Key",
     "Accept": "application/json"` |
-| Sample full GET or POST request | `_______________________________` |
+| Sample full GET or POST request | `{
+    "items": [
+        {
+            "id": "IDKey",
+            "title": "Brandon's space",
+            "type": "group",
+            "lastActivity": "2026-09-23T09:36:12.802Z",
+            "creatorId": "CreatorIDKey",
+            "created": "2026-09-23T09:36:12.802Z",
+            "ownerId": "OwnerIDKey",
+            "isPublic": false,
+            "isReadOnly": false,
+            "isLocked": false
+        }
+    ]
+}` |
 ---
 ## ISS Current Location API (2 marks)
 | Criteria | Details |

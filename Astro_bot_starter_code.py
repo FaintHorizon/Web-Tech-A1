@@ -38,7 +38,7 @@ def get_api_key(prompt, hardcoded_key):
     with open("keys.json", "r") as file: #Opens the keys.json file to read the hard-coded API key
         keys = json.load(file)
 
-    return keys["keys"][hardcoded_key] #Returns the hard-coded API key from the keys.json file if the user chooses to use it
+    return keys["keys"]["Open-Weather"] #Returns the hard-coded API key from the keys.json file if the user chooses to use it
 
 
 # =========================
@@ -62,7 +62,7 @@ def get_rooms(token):
 
 def print_rooms(rooms):
     for room in rooms:
-        print(#complete the print statement to display the room title and id)
+        print(f"Room: {room['title']} | ID: {room['id']}")
 
 
 def select_room(rooms):
