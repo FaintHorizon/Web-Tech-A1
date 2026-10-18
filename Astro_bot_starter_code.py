@@ -179,16 +179,23 @@ def get_weather(city, api_key):
 # ISS FUNCTIONS
 # =========================
 def reverse_geocode(lat, lon, api_key):
-    url = #complete the URL to fetch reverse geocoding data from OpenWeatherMap API
-    params = #complete the params dictionary to include the latitude, longitude, limit, and the API key
+    url = "https://api.openweathermap.org/geo/1.0/reverse" #URL to fetch reverse geocoding data from the OpenWeatherMap API using latitude and longitude coordinates
 
-    response = requests.#complete(url, params=params)
+    parameters = { #parameters dictionary to include the latitude, longitude, limit, and the API key for reverse geocoding
+        "lat": lat,
+        "lon": lon,
+        "limit": 1,
+        "appid": api_key
+    }
+
+    response = requests.get(url, params=parameters)
 
     if response.status_code != 200:
+        print("Error fetching reverse geocoding data:", response.status_code)
         return None
 
-    data = response.json()
-    return data[0] if data else None
+    data = response.json() #Parses the JSON response from the OpenWeatherMap API to extract the reverse geocoding data based on the provided latitude and longitude coordinates
+    return data[0] if data else None #Returns the first result from the reverse geocoding data if available, or None if no results are found
 
 
 def get_iss_location(api_key):
