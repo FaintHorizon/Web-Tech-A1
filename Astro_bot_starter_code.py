@@ -1,9 +1,3 @@
-#Contains partially completed code with sections for you to complete
-#IT IS MANDATORY TO USE THE RESOURCE PROVIDED
-#The starter code is structured into functions and modules. You are required to complete the missing sections while maintaining this modular design.  Further step by step instructions can be found in the appendix A of this assignment brief. 
-#For extended features implement it within the existing modular structure. The new feature must be triggered using a new command (e.g., /stars, /moon, /sky) and follow the same approach 
-#Use Git for version control. Maintain a repository on GitHub to track your project’s progress and changes. Ensure regular commits for each step with meaningful messages that document your step by stepdevelopment process. 
-
 # =========================
 # REQUIRED LIBRARIES
 # =========================
@@ -84,13 +78,17 @@ def select_room(rooms): #Function to allow the user to select a room by name fro
 
 
 def get_latest_message(token, room_id):
-    url = #complete the URL to fetch messages from Webex API
-    params = {"roomId":#complete, "max": #complete}
-    headers = #complete the headers dictionary to include the Authorization header with the token
+    url = "https://webexapis.com/v1/messages"
+    params = {"roomId": room_id, "max": 1}
+    headers = {
+        "Authorization": token,
+        "Accept": "application/json"
+    }
 
-    response = requests.#complete(#complete, headers=headers, params=params)
+    response = requests.get(url, headers=headers, params=params)
 
     if response.status_code != 200:
+        print("Error fetching messages:", response.status_code)
         return None, None
 
     data = response.json().get("items", [])
@@ -103,13 +101,20 @@ def get_latest_message(token, room_id):
 
 
 def send_message(token, room_id, message):
-    url = #complete the URL to send messages to Webex API
-    headers = #complete the headers dictionary to include the Authorization header with the token and Content-Type as application/json
+    url = "https://webexapis.com/v1/messages"
+    headers = {
+        "Authorization": token,
+        "Content-Type": "application/json"
+    }
     data = {
         "roomId": room_id,
         "text": message
     }
-    requests.#complete(url, headers=headers, data=json.dumps(data))
+
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+
+    if response.status_code != 200:
+        print("Error sending message:", response.status_code)
 
 # =========================
 # WEATHER FUNCTIONS
