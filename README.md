@@ -19,7 +19,7 @@ pattern in development of the Bot
 | Endpoint to send message | `/v1/messages` |
 | Required headers | `"Authorization": "Bearer API Key",
     "Accept": "application/json"` |
-| Sample full GET or POST request | `</br>
+| Sample full GET or POST request || `<br>
 {
     "items": [
         {
@@ -35,7 +35,7 @@ pattern in development of the Bot
             "isLocked": false
         }
     ]
-}` |
+}` <br>
 ---
 ## ISS Current Location API (2 marks)
 | Criteria | Details |
@@ -66,7 +66,7 @@ detail** |
 | Authentication method | `N/A` |
 | Required query parameters | `PostCode,CoutryCode,APIKEY` |
 | Sample request with latitude/longitude | `lat={lat}&lon={lon}&limit={limit}&appid={API key}` |
-| Sample JSON response (formatted example) |
+| Sample JSON response (formatted example) ||
 {
     "zip": "WD25",
     "name": "Watford",
@@ -87,7 +87,7 @@ details)** |
 | Endpoint for current weather | `https://api.openweathermap.org/data/2.5/weather?` |
 | Authentication method | `{appid}` | -- remove {} brackets
 | Required query parameters | `lat,long,appid,units` |
-| Sample JSON response (formatted example) |
+| Sample JSON response (formatted example) ||
 {
     "coord": {
         "lon": 0.1278,
@@ -151,10 +151,10 @@ print(date_time)
 print(date_time.date())
 ```
 ```
-|
-| Output (human-readable time) | 
+
+Output (human-readable time)  
 `2029-10-25 17:17:48
-2029-10-25` |
+2029-10-25` 
 ---
 ## Extended Feature API ( 3 marks)
 | Criteria | Details |
@@ -164,7 +164,7 @@ print(date_time.date())
 | Endpoint | `apod-basic/` |
 | Authentication method | `API Key` |
 | Required query parameters | `API Key` |
-| Sample JSON response (formatted example) |
+| Sample JSON response (formatted example) ||
 
 {
     "date": "2026-10-19",
@@ -179,7 +179,7 @@ print(date_time.date())
 
 ```
 ```
-|
+
 ---
 ## Evaluation – Web Architecture, MVC Design & Security
 In this section, evaluate how web technologies, architecture, and design patterns
@@ -209,11 +209,6 @@ This makes it so the python code can read the json and get the appropriate keys 
 
 ---
 ### RESTful API Usage in Your Application (3 marks )
-Explain how REST APIs are used in your AstroBot:
-- Describe how HTTP methods (GET, POST) are used
-- Explain how your bot interacts with APIs (Webex, Weather, ISS, Geocoding)
-- Describe how JSON responses are received and processed
-Note: Relate your explanation directly to your code for higher grade.
 
 The bot uses **POST** and **GET** requests to read and reply to the messeges through Webex using Get to read new messeges and post to send the response.
 
