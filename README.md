@@ -159,11 +159,11 @@ print(date_time.date())
 ## Extended Feature API ( 3 marks)
 | Criteria | Details |
 |---------|---------|
-| API Provider | '_________' |
-| API Base URL | `_______________________________` |
-| Endpoint | `_______________________________` |
-| Authentication method | `_______________________________` |
-| Required query parameters | `_______________________________` |
+| API Provider | 'Nasa' |
+| API Base URL | `https://science.nasa.gov/wp-json/wp/v2/` |
+| Endpoint | `apod-basic/` |
+| Authentication method | `API Key` |
+| Required query parameters | `API Key` |
 | Sample JSON response (formatted example) |
 ```
 ```
@@ -188,7 +188,8 @@ keys.json in the main folder organaised as so
     "keys":
     {
         "Webex":"Webex Dev Key",
-        "Open-Weather":"Open Weather API Key"
+        "Open-Weather":"Open Weather API Key",
+        "Nasa":"Nasa Open API key"
     }
 }
 </br>
@@ -207,7 +208,9 @@ The bot uses **POST** and **GET** requests to read and reply to the messeges thr
 We utilize the requests libary to send the post and get requests and the JSON libary to read the fields from the api responses such as items, id, and text from webex or lat and lon from geocoding.
 
 #### Security Considerations: (2 marks)
+
 We can check status codes with the responses and compare them to a value of 200 with 200 meaning ok anything else we can mark as a fail and report that to the terminal or the user.
+
 ---
 ### MVC Design Pattern in AstroBot (3 Marks)
 
@@ -222,11 +225,20 @@ Astro bot has the model side the different functions to retrive data, the view s
 ---
 ### 🚀 Reflection and Evaluation ( 8 marks )
 Reflect on your AstroBot (400 words):
-- How effective is your bot in meeting the Astronomy Club’s needs?
-- What design decisions worked well?
-- What challenges did you face when integrating APIs?
-- What security risks did you identify and how were they handled?
-- How could your solution be improved in the future?
+## Reflection and Evaluation
+
+
+The AstroBot works well within the scope of the project and provides the main features required for the Astronomy Club. Users can interact with the bot through Webex and use commands to retrieve weather information for a chosen city, check the current location of the International Space Station, view the available commands and shut down the bot. While there are additional features that could be added, the current implementation covers the main requirements without making the program unnecessarily complicated.
+
+One design decision that worked well was keeping the program modular. By separating the different tasks into functions, it was easier to test individual elements outside of the main program. For example, the functions for retrieving weather information, getting city coordinates and finding a location from latitude and longitude can be handled separately. This also makes the code easier to read and means that changes can be made to one part without needing to rewrite the entire program.
+
+One of the main challenges I faced when integrating the APIs was finding the correct information in the documentation. The Webex documentation is very expansive and covers far more than what was required for this project. As a result, finding the specific endpoints, parameters and information needed for the bot was sometimes troublesome because it was buried among other documentation. Another challenge was understanding how the different APIs worked together, particularly how geocoding could be used to find coordinates before retrieving weather information, or to identify a nearby location for the ISS.
+
+A security risk I identified was the possibility of exposing API keys publicly. To reduce this risk, I used a keys.json file to store the Webex and OpenWeather keys separately from the main Python code. I also added the file to .gitignore so it would not be uploaded to GitHub with the rest of the project. This is a more secure approach than directly hardcoding the keys into the program, although care still needs to be taken to ensure the file is not shared or committed accidentally.
+
+In the future, the bot could be improved by adding a startup screen or some form of loading indicator when API requests take longer to complete. At the moment, a user could assume the program has crashed if it takes a while to respond. The bot could also be expanded with additional astronomy-related features, such as NASA's Astronomy Picture of the Day API. These changes would make the bot more useful and improve the user experience while keeping the existing modular structure.
+
+
 ---
 **Tip:** Link your answers directly to your code and examples for higher marks.
 ### Notes
