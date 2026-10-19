@@ -19,7 +19,7 @@ pattern in development of the Bot
 | Endpoint to send message | `/v1/messages` |
 | Required headers | `"Authorization": "Bearer API Key",
     "Accept": "application/json"` |
-| Sample full GET or POST request | `
+| Sample full GET or POST request | `</br>
 {
     "items": [
         {
