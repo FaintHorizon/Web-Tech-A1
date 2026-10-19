@@ -19,7 +19,8 @@ pattern in development of the Bot
 | Endpoint to send message | `/v1/messages` |
 | Required headers | `"Authorization": "Bearer API Key",
     "Accept": "application/json"` |
-| Sample full GET or POST request | `{
+| Sample full GET or POST request | `
+{
     "items": [
         {
             "id": "IDKey",
@@ -174,19 +175,13 @@ have been applied in your **AstroBot**. Your responses must relate directly to y
 implementation and include reflection on your design decisions.
 ---
 ### Web Architecture – Client–Server Model (3 marks)
-Explain how the client–server model applies to your AstroBot:
-- Identify the **client**
-- Identify the **server(s)**
-- Describe how data flows between:
-- User, AstroBot and APIs
-Include a **simple block diagram** to illustrate this interaction.
 
 In the scenario we have the users who are the clients they are messeging through webex our server to comunicate with the bot that pulls from the apis (open weather, webex and the ISS location). 
 
 <img src=".\imgs\WebTechDiagOne.png" alt="Diagram One"><br>
 
 #### Security Considerations: (3 marks )
-Hardcoding keys ive done through a json file added to the gitignore list
+Hardcoding keys ive done through a json file added to the gitignore list.
 keys.json in the main folder organaised as so 
 {
     "keys":
