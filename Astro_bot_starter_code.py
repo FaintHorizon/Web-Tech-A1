@@ -256,9 +256,9 @@ def main():
 
             last_message_id = message_id
 
-            print(#complete the print statement to display the received message text)
+            print(f"New message received: {message_text}")
 
-            if not message_text.startswith(#complete):
+            if not message_text.startswith("/"):
                 continue
 
             if message_text.lower() == "/help":
@@ -268,7 +268,7 @@ def main():
                     "/weather <city>\n/iss\n/help\n/quit"
                 )
 
-            elif message_text.lower().startswith(#complete):
+            elif message_text.lower().startswith("/weather"):
 
                 parts = message_text.split(maxsplit=1)
 
@@ -278,10 +278,10 @@ def main():
                     city = parts[1]
                     send_message(token, room_id, get_weather(city, weather_key))
 
-            elif message_text.lower() == "#complete":
+            elif message_text.lower() == "/iss":
                 send_message(token, room_id, get_iss_location(weather_key))
 
-            elif message_text.lower() == "#complete":
+            elif message_text.lower() == "/quit":
                 send_message(token, room_id, "AstroBot shutting down.")
                 break
 
