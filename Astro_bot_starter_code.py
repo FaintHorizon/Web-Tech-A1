@@ -16,13 +16,13 @@ def get_webex_token():
 
     if choice == "n":
         token = input("Enter your Webex Access Token: ") #Asks the user to input their Webex Access Token if they choose not to use the hard-coded token
-        print(f"---Debug: Using user-provided Webex token: {token}---")
+        #print(f"---Debug: Using user-provided Webex token: {token}---")
         return f"Bearer {token}"
     else:
         with open("keys.json", "r") as file:
             keys = json.load(file)
         token = keys["keys"]["Webex"]
-        print (f"---Debug: Using Hard-coded Webex token: {token}---")
+        #print (f"---Debug: Using Hard-coded Webex token: {token}---")
         return f"Bearer {token}"
 
 
@@ -32,13 +32,13 @@ def get_api_key():
 
     if choice == "n":
         weatherKey = input("Enter your Open-Weather API key: ")
-        print("---Debug: Using user-provided Open-Weather key---")
+        #print("---Debug: Using user-provided Open-Weather key---")
         return weatherKey
     else:
         with open("keys.json", "r") as file:
             keys = json.load(file)
     weatherKey = keys["keys"]["Open-Weather"]
-    print("---Debug: Using key from keys.json---")
+    #print("---Debug: Using key from keys.json---")
     return weatherKey
 
 
@@ -235,15 +235,12 @@ def main():
 
     token = get_webex_token()
 
-    weather_key = get_api_key(
-        "Weather API key",
-        "YOUR_OPENWEATHER_API_KEY"
-    )
+    weather_key = get_api_key()
 
     rooms = get_rooms(token)
 
     if not rooms:
-        print(#complete the print statement )
+        print("No Webex rooms found or unable to fetch rooms.")
         return
 
     print_rooms(rooms)

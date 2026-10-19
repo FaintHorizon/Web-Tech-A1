@@ -1,13 +1,4 @@
-Hardcoding Keys
-exaple make a keys.json file in main
-keys.json is part of the git ignore
-{
-    "keys":
-    {
-        "Webex":"Webex Dev Key",
-        "Open-Weather":"Open Weather API Key"
-    }
-}
+
 
 # 🚀 ASTRO Bot API Investigation Sheet
 **Total Marks: 40**
@@ -190,9 +181,16 @@ Explain how the client–server model applies to your AstroBot:
 - User, AstroBot and APIs
 Include a **simple block diagram** to illustrate this interaction.
 #### Security Considerations: (3 marks )
-- Consider but not limiting to secure handling of API keys and tokens, API rate
-limiting, and Input validation (e.g., handling user commands safely), include
-examples from code where necessary to illustrate.
+Hardcoding keys ive done through a json file added to the gitignore list
+keys.json in the main folder organaised as so 
+{
+    "keys":
+    {
+        "Webex":"Webex Dev Key",
+        "Open-Weather":"Open Weather API Key"
+    }
+}
+this makes it so the python code can read the json and get the appropriate keys while not uploading them to github
 ---
 ### RESTful API Usage in Your Application (3 marks )
 Explain how REST APIs are used in your AstroBot:
