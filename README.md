@@ -20,6 +20,7 @@ pattern in development of the Bot
 | Required headers | `"Authorization": "Bearer API Key",
     "Accept": "application/json"` |
 | Sample full GET or POST request || `<br>
+
 {
     "items": [
         {
@@ -51,8 +52,7 @@ pattern in development of the Bot
     "timestamp": 1790761317,
     "message": "success"
 }
-```
-```
+
 |
 ---
 ## Geocoding API (4 marks)
@@ -74,9 +74,8 @@ detail** |
     "lon": -0.396,
     "country": "GB"
 }
-```
-```
-|
+
+
 ---
 ## Weather API (3 marks)
 | Criteria | Details |
@@ -134,9 +133,7 @@ details)** |
     "name": "Abbey Wood",
     "cod": 200
 }
-```
-```
-|       
+
 ---
 ## Epoch to Human Time Conversion (Python time module) (2 marks)
 | Criteria | Details |
@@ -149,8 +146,7 @@ from datetime import datetime
 date_time = datetime.fromtimestamp(1887639468)
 print(date_time)
 print(date_time.date())
-```
-```
+
 
 Output (human-readable time)  
 `2029-10-25 17:17:48
@@ -176,9 +172,6 @@ Output (human-readable time)
     "hdurl": "https://assets.science.nasa.gov/dynamicimage/assets/science/cds/apod/apod/2026/october/trebleclef.jpg"
 }
 
-
-```
-```
 
 ---
 ## Evaluation – Web Architecture, MVC Design & Security
@@ -225,9 +218,9 @@ Astro bot has the model side the different functions to retrive data, the view s
 
 | Component | Description and Example (Relate to your Bot) |
 |------------|----------------------------------|
-| **Model** | | we have numerus functions to retive data get_rooms(), get_city_coordinates() etc can all be viewed as the model
-| **View** | | print_rooms() shows the rooms in terminal to allow the user to set the bot to join, send_message() is what allows the bot to post inside of the room
-| **Controller** | | The / Commands such as help, quit and the api specific ones such as /weather (location)
+| **Model** |  we have numerus functions to retive data get_rooms(), get_city_coordinates() etc can all be viewed as the model 
+| **View** |  print_rooms() shows the rooms in terminal to allow the user to set the bot to join, send_message() is what allows the bot to post inside of the room
+| **Controller** |  The / Commands such as help, quit and the api specific ones such as /weather (location)
 
 ---
 ### 🚀 Reflection and Evaluation ( 8 marks )
