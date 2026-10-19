@@ -183,6 +183,7 @@ In the scenario we have the users who are the clients they are messeging through
 #### Security Considerations: (3 marks )
 Hardcoding keys ive done through a json file added to the gitignore list.
 keys.json in the main folder organaised as so 
+</br>
 {
     "keys":
     {
@@ -190,7 +191,9 @@ keys.json in the main folder organaised as so
         "Open-Weather":"Open Weather API Key"
     }
 }
-this makes it so the python code can read the json and get the appropriate keys while not uploading them to github
+</br>
+This makes it so the python code can read the json and get the appropriate keys while not uploading them to github
+
 ---
 ### RESTful API Usage in Your Application (3 marks )
 Explain how REST APIs are used in your AstroBot:
@@ -198,18 +201,24 @@ Explain how REST APIs are used in your AstroBot:
 - Explain how your bot interacts with APIs (Webex, Weather, ISS, Geocoding)
 - Describe how JSON responses are received and processed
 Note: Relate your explanation directly to your code for higher grade.
+
+The bot uses **POST** and **GET** requests to read and reply to the messeges through Webex using Get to read new messeges and post to send the response.
+
+We utilize the requests libary to send the post and get requests and the JSON libary to read the fields from the api responses such as items, id, and text from webex or lat and lon from geocoding.
+
 #### Security Considerations: (2 marks)
-- Check response status codes, Handling invalid or unexpected API responses,
-Avoiding excessive API calls
+We can check status codes with the responses and compare them to a value of 200 with 200 meaning ok anything else we can mark as a fail and report that to the terminal or the user.
 ---
 ### MVC Design Pattern in AstroBot (3 Marks)
-Explain how the **Model–View–Controller (MVC)** pattern applies to your solution:
-Provide a short example based on your implementation
+
+Astro bot has the model side the different functions to retrive data, the view side where it posts messeges to terminal or the chatroom and the controler side where it allows the user to use slash commands to opperate its different functions.
+
 | Component | Description and Example (Relate to your Bot) |
 |------------|----------------------------------|
-| **Model** | |
-| **View** | |
-| **Controller** | |
+| **Model** | | we have numerus functions to retive data get_rooms(), get_city_coordinates() etc can all be viewed as the model
+| **View** | | print_rooms() shows the rooms in terminal to allow the user to set the bot to join, send_message() is what allows the bot to post inside of the room
+| **Controller** | | The / Commands such as help, quit and the api specific ones such as /weather (location)
+
 ---
 ### 🚀 Reflection and Evaluation ( 8 marks )
 Reflect on your AstroBot (400 words):
