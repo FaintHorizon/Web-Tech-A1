@@ -180,6 +180,11 @@ Explain how the client–server model applies to your AstroBot:
 - Describe how data flows between:
 - User, AstroBot and APIs
 Include a **simple block diagram** to illustrate this interaction.
+
+In the scenario we have the users who are the clients they are messeging through webex our server to comunicate with the bot that pulls from the apis (open weather, webex and the ISS location). 
+
+<img src=".\imgs\WebTechDiagOne.png" alt="Diagram One"><br>
+
 #### Security Considerations: (3 marks )
 Hardcoding keys ive done through a json file added to the gitignore list
 keys.json in the main folder organaised as so 
