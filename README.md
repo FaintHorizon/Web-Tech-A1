@@ -165,6 +165,18 @@ print(date_time.date())
 | Authentication method | `API Key` |
 | Required query parameters | `API Key` |
 | Sample JSON response (formatted example) |
+
+{
+    "date": "2026-10-19",
+    "title": "Treble Clef: Unusual X-ray Hot Radio Source",
+    "media_type": "image",
+    "explanation": "This unusual radio structure extends over 2 million light-years and resembles a musical symbol. Recent observations suggest it may have originated from a supermassive black hole.",
+    "credit": "NASA/CXC/INAF-IRA and other contributors",
+    "url": "https://science.nasa.gov/image-article/apod-2026-october-19-treble-clef-unusual-x-ray-hot-radio-source/",
+    "hdurl": "https://assets.science.nasa.gov/dynamicimage/assets/science/cds/apod/apod/2026/october/trebleclef.jpg"
+}
+
+
 ```
 ```
 |

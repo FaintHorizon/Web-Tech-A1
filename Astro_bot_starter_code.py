@@ -2,11 +2,14 @@
 # REQUIRED LIBRARIES
 # =========================
 
-from fastapi import params
+
 import requests
 import json
 import time
+import re
 from datetime import datetime
+from html import unescape
+from fastapi import params
 
 # =========================
 # CONFIGURATION FUNCTIONS
@@ -40,6 +43,21 @@ def get_api_key():
     weatherKey = keys["keys"]["Open-Weather"]
     #print("---Debug: Using key from keys.json---")
     return weatherKey
+
+def get_nasa_api_key():
+    choice = input("Use hard-coded NASA key? (y/n): ").lower()
+
+    if choice == "n":
+        nasaKey = input("Enter your NASA API key: ")
+        #print("---Debug: Using user-provided NASA key---")
+        return nasaKey
+    else:
+        with open("keys.json", "r") as file:
+            keys = json.load(file)
+    nasaKey = keys["keys"]["Nasa"]
+    #print("---Debug: Using key from keys.json---")
+    return nasaKey
+
 
 
 # =========================
@@ -101,18 +119,22 @@ def get_latest_message(token, room_id): #Function to fetch the latest message fr
     return latest.get("id"), latest.get("text", "")
 
 
-def send_message(token, room_id, message): #Function to send a message to a specified Webex room using the Webex API
+def send_message(token, room_id, message, file_url=None): #Function to send a message to a specified Webex room using the Webex API, with an optional file attachment
     url = "https://webexapis.com/v1/messages"
     headers = { #headers dictionary to include the Authorization header with the token and Content-Type as application/json
         "Authorization": token,
         "Content-Type": "application/json"
     }
-    data = { #data dictionary to include the room ID and the message text to be sent to the specified Webex room
+
+    data = { #data dictionary to include the room ID and message text, and optionally a file URL if provided
         "roomId": room_id,
         "text": message
     }
 
-    response = requests.post(url, headers=headers, data=json.dumps(data))
+    if file_url: #Checks if a file URL is provided, and if so, adds it to the data dictionary under the "files" key to include the file attachment in the message
+        data["files"] = [file_url]
+
+    response = requests.post(url, headers=headers, json=data) #request to send a message to the specified Webex room using the requests library with the POST method, passing in the URL, headers, and data as JSON
 
     if response.status_code != 200: #Error handling to check if the response status code is not 200 (OK), indicating an error in sending the message
         print("Error sending message:", response.status_code)
@@ -227,16 +249,68 @@ def get_iss_location(api_key):
         f"Longitude: {lon}\n"
         f"Nearby location: {place}"
     )
+# =========================
+# Nasa APOD
+# =========================
+def get_nasa_apod(api_key):
+    url = "https://science.nasa.gov/wp-json/wp/v2/apod-basic/"
+    parameters = {"api_key": api_key}
 
+    response = requests.get(url, params=parameters)
+
+    if response.status_code != 200:
+        print("Error fetching NASA APOD:", response.status_code)
+        return "Unable to retrieve NASA's Picture of the Day.", None
+
+    data = response.json()
+
+    if not data:
+        return "No NASA Picture of the Day was found.", None
+
+    picture = data[0] if isinstance(data, list) else data
+
+    title = picture.get("title", "Title unavailable")
+    picture_date = picture.get("date", "Date unavailable")
+    explanation = picture.get("explanation", "No explanation available.")
+    page_url = picture.get("url", picture.get("permalink", ""))
+    image_url = picture.get("hdurl", "")
+
+    # Remove HTML tags and decode special characters
+    explanation = re.sub(r"<[^>]+>", "", explanation)
+    explanation = unescape(explanation)
+    explanation = re.sub(r"\s+", " ", explanation).strip()
+
+    # Remove the repeated Explanation heading
+    explanation = re.sub(
+        r"^(?:Explanation\s*:\s*)+",
+        "",
+        explanation,
+        flags=re.IGNORECASE
+    )
+
+    if len(explanation) > 800:
+        explanation = explanation[:800].rsplit(" ", 1)[0] + "..."
+
+    message = (
+        f"NASA Picture of the Day - {picture_date}\n"
+        f"{title}\n\n"
+        f"{explanation}\n\n"
+        f"NASA page: {page_url}"
+    )
+
+    # Only attach the image when today's APOD is an image
+    if picture.get("media_type") != "image":
+        image_url = None
+
+    return message, image_url
 # =========================
 # MAIN BOT LOGIC
 # =========================
 def main():
 
     token = get_webex_token()
-
     weather_key = get_api_key()
-
+    nasa_key = get_nasa_api_key()
     rooms = get_rooms(token)
 
     if not rooms:
@@ -265,7 +339,7 @@ def main():
                 send_message(
                     token,
                     room_id,
-                    "/weather <city>\n/iss\n/help\n/quit"
+                    "/weather <city>\n/iss\n/picture\n/help\n/quit"
                 )
 
             elif message_text.lower().startswith("/weather"):
@@ -280,7 +354,9 @@ def main():
 
             elif message_text.lower() == "/iss":
                 send_message(token, room_id, get_iss_location(weather_key))
-
+            elif message_text.lower() == "/picture":
+                apod_message, image_url = get_nasa_apod(nasa_key)
+                send_message(token, room_id, apod_message, image_url)
             elif message_text.lower() == "/quit":
                 send_message(token, room_id, "AstroBot shutting down.")
                 break
