@@ -28,8 +28,6 @@ def get_webex_token():
         #print (f"---Debug: Using Hard-coded Webex token: {token}---")
         return f"Bearer {token}"
 
-
-
 def get_api_key():
     choice = input("Use hard-coded Open-Weather key? (y/n): ").lower()
 
